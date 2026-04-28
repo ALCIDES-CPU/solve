@@ -21,11 +21,11 @@ const siteUrl = "https://aimagovpt.com"
 
 export const metadata: Metadata = {
   title: {
-    default: "AIMA Portugal - Agendamento e Apoio ao Imigrante",
+    default: "AIMA - Agência para a Integração, Migrações e Asilo.",
     template: "%s | AIMA Portugal"
   },
   description:
-    "Portal informativo para agendamentos na AIMA (ex-SEF). Saiba como renovar autorização de residência, reagrupamento familiar e regularização de imigrantes em Portugal.",
+    "Portal oficial da AIMA. Renovar autorização de residência, reagrupamento familiar e regularização de imigrantes em Portugal.",
 keywords: [
   "AIMA Portugal agendamento 2026",
   "renovação autorização de residência online",
