@@ -1,6 +1,20 @@
 import "./globals.css"
 import type { Metadata } from "next"
 import { Analytics } from '@vercel/analytics/next'
+import { Inter, Roboto } from "next/font/google"
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+})
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "700"],
+  variable: "--font-roboto",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   title: {
@@ -31,15 +45,12 @@ export const metadata: Metadata = {
   authors: [{ name: "AIMA" }],
   creator: "AIMA",
   publisher: "AIMA",
-
   formatDetection: {
     email: false,
     address: false,
     telephone: false
   },
-
   metadataBase: new URL("https://aimagovpt.com"),
-
   alternates: {
     canonical: "/",
     languages: {
@@ -47,7 +58,6 @@ export const metadata: Metadata = {
       "en-US": "/en"
     }
   },
-
   openGraph: {
     title: "AIMA - Agendamento para atendimento",
     description:
@@ -65,7 +75,6 @@ export const metadata: Metadata = {
     locale: "pt_PT",
     type: "website"
   },
-
   robots: {
     index: true,
     follow: true,
@@ -85,8 +94,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt" suppressHydrationWarning>
-      <body suppressHydrationWarning>
+    <html lang="pt" suppressHydrationWarning className={`${inter.variable} ${roboto.variable}`}>
+      <body suppressHydrationWarning className="font-sans">
         {children}
         <Analytics />
       </body>
