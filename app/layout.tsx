@@ -16,60 +16,49 @@ const roboto = Roboto({
   display: "swap",
 })
 
+// URLs de referência para SEO
+const siteUrl = "https://aimagovpt.com"
+
 export const metadata: Metadata = {
   title: {
-    default: "AIMA - Agendamento de Serviços e Apoio ao Imigrante",
-    template: "%s | AIMA"
+    default: "AIMA Portugal - Agendamento e Apoio ao Imigrante",
+    template: "%s | AIMA Portugal"
   },
   description:
-    "Portal oficial da Agência para a Integração, Migrações e Asilo (AIMA). Realize agendamentos, consulte processos e obtenha informações sobre residência em Portugal.",
+    "Portal informativo para agendamentos na AIMA (ex-SEF). Saiba como renovar autorização de residência, reagrupamento familiar e regularização de imigrantes em Portugal.",
   keywords: [
-    "AIMA",
-    "Agendamento AIMA",
-    "Residência Portugal",
-    "Imigração",
-    "Vistos Portugal",
-    "Integração Migrantes",
-    "AIMA Portugal",
-    "agendamento AIMA",
-    "regularização de imigrantes Portugal",
-    "documentos Portugal imigrantes",
-    "SEF AIMA ajuda",
-    "marcação AIMA Portugal",
-    "renovação de residência Portugal",
-    "renovar autorização de residência AIMA",
-    "agendamento AIMA renovação",
-    "documentos renovação residência Portugal",
-    "AIMA Portugal renovação",
+    "AIMA agendamento online",
+    "AIMA contactos",
+    "renovação residência portugal",
+    "manifestação de interesse portugal",
+    "vistos para portugal 2024",
+    "integração migrações e asilo",
+    "portal aima agendamentos",
+    "como agendar na AIMA",
+    "residência CPLP"
   ],
-  authors: [{ name: "AIMA" }],
+  authors: [{ name: "AIMA Portugal" }],
   creator: "AIMA",
   publisher: "AIMA",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false
-  },
-  metadataBase: new URL("https://aimagovpt.com"),
+  metadataBase: new URL(siteUrl),
   alternates: {
     canonical: "/",
     languages: {
-      "pt-PT": "/pt",
+      "pt-PT": "/",
       "en-US": "/en"
     }
   },
   openGraph: {
-    title: "AIMA - Agendamento para atendimento",
-    description:
-      "Plataforma oficial para agendamentos e serviços da Agência para a Integração, Migrações e Asilo.",
-    url: "https://aimagovpt.com",
-    siteName: "AIMA",
+    title: "AIMA - Agendamentos e Informações sobre Imigração em Portugal",
+    description: "Tudo sobre agendamentos, vistos e autorização de residência em Portugal através da AIMA.",
+    url: siteUrl,
+    siteName: "AIMA Portugal",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.png", // Certifique-se que este arquivo existe na pasta public
         width: 1200,
         height: 630,
-        alt: "AIMA Portal de Serviços"
+        alt: "AIMA Portugal - Serviços ao Imigrante"
       }
     ],
     locale: "pt_PT",
@@ -85,6 +74,11 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1
     }
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AIMA Portugal - Agendamentos",
+    description: "Portal de apoio ao imigrante em Portugal.",
   }
 }
 
@@ -93,8 +87,33 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  // JSON-LD para busca estruturada (Schema.org)
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "GovernmentOrganization",
+    "name": "AIMA - Agência para a Integração, Migrações e Asilo",
+    "url": siteUrl,
+    "logo": `${siteUrl}/logo.png`,
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "PT"
+    },
+    "description": "Organismo responsável por serviços de imigração e asilo em Portugal.",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+351-217-115-000",
+      "contactType": "customer service"
+    }
+  }
+
   return (
-    <html lang="pt" suppressHydrationWarning className={`${inter.variable} ${roboto.variable}`}>
+    <html lang="pt-PT" suppressHydrationWarning className={`${inter.variable} ${roboto.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body suppressHydrationWarning className="font-sans">
         {children}
         <Analytics />
