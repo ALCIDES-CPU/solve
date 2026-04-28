@@ -69,13 +69,16 @@ export default function FAQPage() {
       <Navigation />
 
       <main className="flex-1" style={{ paddingTop: "108px" }}>
-        {/* Hero Section */}
-        <section className="py-16 lg:py-20 bg-[#1A3A4A] relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-[#007A8A]/15 rounded-full blur-3xl" />
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Hero Section */}
+        <section className="py-16 lg:py-20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#1a0a36] via-[#2D1057] to-[#5B2C83]" />
+          <div className="absolute top-0 right-0 w-80 h-80 bg-purple-400/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-20 w-60 h-60 bg-violet-500/10 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl">
-              <span className="inline-block text-xs font-bold text-[#009BAE] uppercase tracking-widest mb-3">
+              <span className="inline-block text-xs font-bold bg-gradient-to-r from-[#C9A0E0] to-[#E8C8FF] bg-clip-text text-transparent uppercase tracking-widest mb-3">
                 Dúvidas Frequentes
               </span>
               <h1 className="text-3xl lg:text-4xl font-bold text-white mb-4">
@@ -89,19 +92,23 @@ export default function FAQPage() {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-16 lg:py-20 bg-[#EEF4F6]">
+        <section className="py-16 lg:py-20 bg-gradient-to-b from-purple-50/60 to-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-white border border-[#D0E4E8] rounded-lg overflow-hidden">
+            <div className="bg-white border border-purple-100 rounded-2xl overflow-hidden shadow-sm">
               <Accordion type="single" collapsible className="w-full">
                 {faqs.map((faq, index) => (
-                  <AccordionItem key={index} value={`item-${index}`} className="border-b border-[#D0E4E8] last:border-0">
-                    <AccordionTrigger className="text-left py-5 px-6 text-sm font-semibold hover:no-underline text-[#1A3A4A] hover:text-[#007A8A] transition-colors hover:bg-[#EEF4F6]">
+                  <AccordionItem
+                    key={index}
+                    value={`item-${index}`}
+                    className="border-b border-purple-50 last:border-0"
+                  >
+                    <AccordionTrigger className="text-left py-5 px-6 text-sm font-semibold hover:no-underline text-[#2D1057] hover:text-[#5B2C83] transition-colors hover:bg-purple-50/50">
                       <div className="flex items-start gap-3">
-                        <HelpCircle className="w-4 h-4 text-[#007A8A] flex-shrink-0 mt-0.5" />
+                        <HelpCircle className="w-4 h-4 text-[#5B2C83] flex-shrink-0 mt-0.5" />
                         <span>{faq.question}</span>
                       </div>
                     </AccordionTrigger>
-                    <AccordionContent className="text-[#4A6570] leading-relaxed pb-5 pl-13 px-6 text-sm">
+                    <AccordionContent className="text-[#6B4A80] leading-relaxed pb-5 px-6 text-sm">
                       <div className="pl-7">{faq.answer}</div>
                     </AccordionContent>
                   </AccordionItem>
@@ -111,8 +118,10 @@ export default function FAQPage() {
 
             {/* CTA Section */}
             <div className="mt-12">
-              <div className="bg-[#1A3A4A] rounded-xl p-10 text-center relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-56 h-56 bg-[#007A8A]/15 rounded-full blur-3xl" />
+              <div className="relative rounded-2xl p-10 text-center overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#1a0a36] via-[#2D1057] to-[#7B3DB0]" />
+                <div className="absolute top-0 right-0 w-56 h-56 bg-purple-400/20 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-48 h-48 bg-violet-500/15 rounded-full blur-2xl pointer-events-none" />
 
                 <div className="relative z-10">
                   <h3 className="text-xl font-bold text-white mb-3">
@@ -124,7 +133,7 @@ export default function FAQPage() {
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
                     <Button
                       asChild
-                      className="bg-[#007A8A] text-white hover:bg-[#005F6E] rounded px-7 h-11 text-sm font-bold shadow-sm transition-colors"
+                      className="bg-gradient-to-r from-[#5B2C83] to-[#8B3DBA] text-white hover:from-[#4a2270] hover:to-[#7a35a8] rounded-full px-7 h-11 text-sm font-bold shadow-lg shadow-purple-900/30 transition-all"
                     >
                       <Link href="/contactos" className="flex items-center gap-2">
                         Ver Contactos
@@ -134,7 +143,7 @@ export default function FAQPage() {
                     <Button
                       asChild
                       variant="outline"
-                      className="border-white/30 text-white hover:bg-white/10 rounded px-7 h-11 text-sm font-semibold bg-transparent"
+                      className="border-white/30 text-white hover:bg-white/10 hover:border-white/50 rounded-full px-7 h-11 text-sm font-semibold bg-transparent transition-all"
                     >
                       <Link href="/agendar">
                         Fazer Agendamento
@@ -146,6 +155,7 @@ export default function FAQPage() {
             </div>
           </div>
         </section>
+
       </main>
 
       <Footer />
