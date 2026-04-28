@@ -26,17 +26,17 @@ export const metadata: Metadata = {
   },
   description:
     "Portal informativo para agendamentos na AIMA (ex-SEF). Saiba como renovar autorização de residência, reagrupamento familiar e regularização de imigrantes em Portugal.",
-  keywords: [
-    "AIMA agendamento online",
-    "AIMA contactos",
-    "renovação residência portugal",
-    "manifestação de interesse portugal",
-    "vistos para portugal 2024",
-    "integração migrações e asilo",
-    "portal aima agendamentos",
-    "como agendar na AIMA",
-    "residência CPLP"
-  ],
+keywords: [
+  "AIMA Portugal agendamento 2026",
+  "renovação autorização de residência online",
+  "portal de renovações AIMA",
+  "reagrupamento familiar Portugal",
+  "visto CPLP validade 2026",
+  "como agendar na AIMA urgente",
+  "contactos AIMA Lisboa Porto",
+  "regularização de imigrantes Portugal 2026"
+],
+  
   authors: [{ name: "AIMA Portugal" }],
   creator: "AIMA",
   publisher: "AIMA",
