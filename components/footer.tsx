@@ -36,7 +36,7 @@ const partners = [
 
 export function Footer() {
   return (
-    <footer className="bg-[#3B1A5A] text-white mt-auto">
+    <footer className="bg-gradient-to-br from-[#1a0a36] via-[#2D1057] to-[#3B1A5A] text-white mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main footer content */}
         <div className="py-14 lg:py-16 border-b border-white/10">
@@ -117,7 +117,7 @@ export function Footer() {
             {partners.map((partner, i) => (
               <div
                 key={i}
-                className="bg-white rounded px-3 py-2 hover:shadow-md transition-shadow"
+                className="bg-white rounded px-3 py-2 hover:shadow-md hover:shadow-purple-900/30 transition-shadow"
               >
                 <Image
                   src={partner.src}
