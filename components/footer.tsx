@@ -36,7 +36,7 @@ const partners = [
 
 export function Footer() {
   return (
-    <footer className="bg-[#1A3A4A] text-white mt-auto">
+    <footer className="bg-[#3B1A5A] text-white mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main footer content */}
         <div className="py-14 lg:py-16 border-b border-white/10">
@@ -54,7 +54,7 @@ export function Footer() {
               <div className="flex flex-col gap-3">
                 <Link
                   href="mailto:info@aimagovpt.com"
-                  className="flex items-center gap-3 text-white/70 hover:text-[#009BAE] transition-colors text-sm"
+                  className="flex items-center gap-3 text-white/70 hover:text-[#C9A0E0] transition-colors text-sm"
                 >
                   <Mail className="w-4 h-4" />
                   info@aimagovpt.com
@@ -77,7 +77,7 @@ export function Footer() {
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="text-white/65 hover:text-[#009BAE] transition-colors text-sm"
+                        className="text-white/65 hover:text-[#C9A0E0] transition-colors text-sm"
                       >
                         {link.label}
                       </Link>
