@@ -27,7 +27,7 @@ export function Navigation() {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${scrolled ? "shadow-md" : "shadow-sm"}`}>
       {/* Government top bar */}
-      <div className="bg-[#3B1A5A] py-1.5">
+      <div className="bg-gradient-to-r from-[#2D1057] via-[#3B1A5A] to-[#1a0a36] py-1.5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <span className="text-xs text-white/60 font-medium tracking-wide">
             Portal Oficial de Agendamento — República Portuguesa
@@ -41,7 +41,7 @@ export function Navigation() {
       </div>
 
       {/* Main header */}
-      <div className="bg-white border-b border-[#D8C8E8]">
+      <div className="bg-white/95 backdrop-blur-md border-b border-purple-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 lg:h-20">
             {/* Logo */}
@@ -59,7 +59,7 @@ export function Navigation() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="px-4 py-2 text-[#3B1A5A] hover:text-[#5B2C83] hover:bg-[#F3EEF8] rounded transition-colors text-sm font-semibold"
+                  className="px-4 py-2 text-[#3B1A5A] hover:text-[#5B2C83] hover:bg-purple-50 rounded transition-colors text-sm font-semibold"
                 >
                   {link.label}
                 </Link>
@@ -69,7 +69,7 @@ export function Navigation() {
             <div className="hidden md:flex items-center">
               <Button
                 asChild
-                className="bg-[#5B2C83] text-white hover:bg-[#3B1A5A] rounded px-5 h-10 text-sm font-bold shadow-sm transition-colors"
+                className="bg-gradient-to-r from-[#5B2C83] to-[#8B3DBA] text-white hover:from-[#4a2270] hover:to-[#7a35a8] rounded px-5 h-10 text-sm font-bold shadow-md shadow-purple-200 transition-all"
               >
                 <Link href="/agendar" className="flex items-center gap-2">
                   Agendar Atendimento
@@ -81,7 +81,7 @@ export function Navigation() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 rounded hover:bg-[#F3EEF8] transition-colors text-[#3B1A5A]"
+              className="md:hidden p-2 rounded hover:bg-purple-50 transition-colors text-[#3B1A5A]"
               aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -92,14 +92,14 @@ export function Navigation() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-[#D8C8E8] shadow-lg">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-purple-100 shadow-lg">
           <div className="px-4 py-5">
             <div className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-[#3B1A5A] hover:text-[#5B2C83] hover:bg-[#F3EEF8] py-3 px-3 rounded border-b border-[#F3EEF8] transition-colors text-base font-semibold"
+                  className="text-[#3B1A5A] hover:text-[#5B2C83] hover:bg-purple-50 py-3 px-3 rounded border-b border-purple-50 transition-colors text-base font-semibold"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}
@@ -109,7 +109,7 @@ export function Navigation() {
               <div className="pt-4">
                 <Button
                   asChild
-                  className="w-full bg-[#5B2C83] text-white hover:bg-[#3B1A5A] rounded h-12 text-base font-bold"
+                  className="w-full bg-gradient-to-r from-[#5B2C83] to-[#8B3DBA] text-white hover:from-[#4a2270] hover:to-[#7a35a8] rounded h-12 text-base font-bold shadow-md shadow-purple-200"
                 >
                   <Link
                     href="/agendar"
