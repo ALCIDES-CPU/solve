@@ -39,7 +39,7 @@ export default function AgendarPage() {
                 </div>
                 <div className="flex items-center gap-2 text-white/60">
                   <CheckCircle className="w-4 h-4 text-[#C9A0E0]" />
-                  <span className="text-sm">Confirmação imediata</span>
+                  <span className="text-sm">Confirmação por email</span>
                 </div>
               </div>
             </div>
