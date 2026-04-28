@@ -150,7 +150,7 @@ export function PaymentForm() {
           <Alert className="bg-white border-purple-100">
             <Shield className="h-4 w-4 text-[#5B2C83]" />
             <AlertDescription className="text-xs text-slate-500">
-              Pagamento processado de forma segura através da plataforma <span className="font-bold text-[#2D1057]">WHOP</span>. Os seus dados estão protegidos com
+              Pagamento processado de forma segura através da plataforma <span className="font-bold text-[#2D1057]">Stripe</span>. Os seus dados estão protegidos com
               encriptação de ponta a ponta.
             </AlertDescription>
           </Alert>
