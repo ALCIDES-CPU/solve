@@ -126,25 +126,21 @@ export function AppointmentForm() {
   const progressPercentage = (step / 4) * 100
 
 const disableDates = (dateToCheck: Date) => {
-  // Datas disponíveis: 10, 22 e 24 de junho de 2026
-  // Nota: Junho = mês 5 no JavaScript (0 = Janeiro)
+  // Datas disponíveis: 7 e 23 de julho de 2026
+  // Nota: Julho = mês 6 no JavaScript (0 = Janeiro)
   const allowedDates = [
-    new Date(2026, 5, 10),
-    new Date(2026, 5, 22),
-    new Date(2026, 5, 24),
+    new Date(2026, 6, 7),
+    new Date(2026, 6, 23),
   ]
-
   // Normalizar data recebida
   const checkDate = new Date(dateToCheck)
   checkDate.setHours(0, 0, 0, 0)
-
   // Verificar se está na lista de datas permitidas
   const isAllowed = allowedDates.some((allowedDate) => {
     const d = new Date(allowedDate)
     d.setHours(0, 0, 0, 0)
     return d.getTime() === checkDate.getTime()
   })
-
   // Se não estiver na lista, desabilita
   return !isAllowed
 }
