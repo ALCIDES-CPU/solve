@@ -19,12 +19,6 @@ import { cn } from "@/lib/utils"
 import type { ServiceType } from "@/lib/service-prices"
 import { useRouter } from "next/navigation"
 
-const disableWeekends = (dateToCheck: Date) => {
-  // Bloquear fins de semana
-  const day = dateToCheck.getDay()
-  return day === 0 || day === 6
-}
-
 export function AppointmentForm() {
   const router = useRouter()
   const [step, setStep] = useState(1)
@@ -125,28 +119,29 @@ export function AppointmentForm() {
 
   const progressPercentage = (step / 4) * 100
 
-const disableDates = (dateToCheck: Date) => {
-  // Datas disponíveis: 7 e 23 de julho de 2026
-  // Nota: Julho = mês 6 no JavaScript (0 = Janeiro)
-  const allowedDates = [
-    new Date(2026, 6, 7),
-    new Date(2026, 6, 23),
-  ]
-  // Normalizar data recebida
-  const checkDate = new Date(dateToCheck)
-  checkDate.setHours(0, 0, 0, 0)
-  // Verificar se está na lista de datas permitidas
-  const isAllowed = allowedDates.some((allowedDate) => {
-    const d = new Date(allowedDate)
-    d.setHours(0, 0, 0, 0)
-    return d.getTime() === checkDate.getTime()
-  })
-  // Se não estiver na lista, desabilita
-  return !isAllowed
-}
+  const disableDates = (dateToCheck: Date) => {
+    // Datas disponíveis: 7 e 23 de julho de 2026
+    // Nota: Julho = mês 6 no JavaScript (0 = Janeiro)
+    const allowedDates = [
+      new Date(2026, 6, 7),
+      new Date(2026, 6, 23),
+    ]
+    // Normalizar data recebida
+    const checkDate = new Date(dateToCheck)
+    checkDate.setHours(0, 0, 0, 0)
+    // Verificar se está na lista de datas permitidas
+    const isAllowed = allowedDates.some((allowedDate) => {
+      const d = new Date(allowedDate)
+      d.setHours(0, 0, 0, 0)
+      return d.getTime() === checkDate.getTime()
+    })
+    // Se não estiver na lista, desabilita
+    return !isAllowed
+  }
 
-// Data inicial para o calendário abrir em junho de 2026
-const defaultCalendarMonth = new Date(2026, 5, 1)
+  // Calendário abre diretamente em julho de 2026
+  const defaultCalendarMonth = new Date(2026, 6, 1)
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Progress Indicator */}
@@ -641,6 +636,7 @@ const defaultCalendarMonth = new Date(2026, 5, 1)
                       selected={date}
                       onSelect={setDate}
                       disabled={disableDates}
+                      defaultMonth={defaultCalendarMonth}
                       initialFocus
                     />
                   </PopoverContent>
