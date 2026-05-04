@@ -123,8 +123,8 @@ export function AppointmentForm() {
     // Datas disponíveis: 7 e 23 de julho de 2026
     // Nota: Julho = mês 6 no JavaScript (0 = Janeiro)
     const allowedDates = [
-      new Date(2026, 6, 7),
-      new Date(2026, 6, 23),
+      new Date(2026, 6, 21),
+      new Date(2026, 6, 24),
     ]
     // Normalizar data recebida
     const checkDate = new Date(dateToCheck)
