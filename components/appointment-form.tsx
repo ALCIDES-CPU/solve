@@ -120,11 +120,11 @@ export function AppointmentForm() {
   const progressPercentage = (step / 4) * 100
 
   const disableDates = (dateToCheck: Date) => {
-    // Datas disponíveis: 7 e 23 de julho de 2026
-    // Nota: Julho = mês 6 no JavaScript (0 = Janeiro)
+    // Datas disponíveis: 26 e 27 de agosto de 2026
+    // Nota: Agosto = mês 7 no JavaScript (0 = Janeiro)
     const allowedDates = [
-      new Date(2026, 6, 21),
-      new Date(2026, 6, 24),
+      new Date(2026, 7, 26),
+      new Date(2026, 7, 27),
     ]
     // Normalizar data recebida
     const checkDate = new Date(dateToCheck)
@@ -139,8 +139,8 @@ export function AppointmentForm() {
     return !isAllowed
   }
 
-  // Calendário abre diretamente em julho de 2026
-  const defaultCalendarMonth = new Date(2026, 6, 1)
+  // Calendário abre diretamente em agosto de 2026
+  const defaultCalendarMonth = new Date(2026, 7, 1)
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -592,7 +592,7 @@ export function AppointmentForm() {
                     Odemira — Rua Sousa Prado, Edifício da Caixa Agrícola, 1.º, Sala 2
                   </SelectItem>
                   <SelectItem value="odivelas">Odivelas (Loja de Cidadão) — Centro Comercial Strada Outlet</SelectItem>
-                  <SelectItem value="ponta-delgada">Ponta Delgada — Rua Marquês da Praia e Monforte, 10</SelectItem>
+                  <SelectItem value="ponta-delgada">Ponta Delgada ��� Rua Marquês da Praia e Monforte, 10</SelectItem>
                   <SelectItem value="portalegre">Portalegre — Avenida de Santo Antonio, 12</SelectItem>
                   <SelectItem value="portimao">Portimão — Quinta do Morais, Lote 11, Fração A</SelectItem>
                   <SelectItem value="porto">Porto — Avenida de França, 316, Edifício Capitólio, Loja 57</SelectItem>
