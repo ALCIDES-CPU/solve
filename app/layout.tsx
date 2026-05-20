@@ -1,6 +1,7 @@
 import "./globals.css"
 import type { Metadata } from "next"
 import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Inter, Roboto } from "next/font/google"
 
 const inter = Inter({
@@ -117,6 +118,7 @@ export default function RootLayout({
       <body suppressHydrationWarning className="font-sans">
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
