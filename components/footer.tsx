@@ -53,11 +53,11 @@ export function Footer() {
               </p>
               <div className="flex flex-col gap-3">
                 <Link
-                  href="mailto:info@aimagovpt.com"
+                  href="mailto:suporte@aimagovpt.com"
                   className="flex items-center gap-3 text-white/70 hover:text-[#C9A0E0] transition-colors text-sm"
                 >
                   <Mail className="w-4 h-4" />
-                  info@aimagovpt.com
+                  suporte@aimagovpt.com
                 </Link>
                 <div className="flex items-center gap-3 text-white/70 text-sm">
                   <Phone className="w-4 h-4" />

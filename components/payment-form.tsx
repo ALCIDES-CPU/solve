@@ -178,7 +178,7 @@ export function PaymentForm() {
                   <h4 className="font-bold text-sm text-[#2D1057] mb-1">Pagamento Seguro via WHOP</h4>
                   <p className="text-xs text-[#6B4A80] leading-relaxed">
                     A transação será processada de forma segura. Após a confirmação, receberá um e-mail com os detalhes
-                    do seu agendamento. Se não receber em 24h, contacte <span className="font-semibold underline">info@aimagovpt.com</span>.
+                    do seu agendamento. Se não receber em 24h, contacte <span className="font-semibold underline">suporte@aimagovpt.com</span>.
                   </p>
                 </div>
               </div>

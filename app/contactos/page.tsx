@@ -14,7 +14,7 @@ const contactInfo = [
   {
     icon: Mail,
     title: "E-mail Geral",
-    details: ["info@aimagovpt.com", "Para questões e informações gerais"],
+    details: ["suporte@aimagovpt.com", "Para questões e informações gerais"],
     color: "bg-[#2D1057]", // Roxo escuro do gradiente
   },
   {
