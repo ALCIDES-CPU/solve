@@ -1,5 +1,4 @@
 'use client'
-
 import * as React from 'react'
 import {
   ChevronDownIcon,
@@ -7,7 +6,6 @@ import {
   ChevronRightIcon,
 } from 'lucide-react'
 import { DayButton, DayPicker, getDefaultClassNames } from 'react-day-picker'
-
 import { cn } from '@/lib/utils'
 import { Button, buttonVariants } from '@/components/ui/button'
 
@@ -25,28 +23,24 @@ function Calendar({
 }) {
   const defaultClassNames = getDefaultClassNames()
 
-  // Definimos o ano corrente ou um específico. 
-  // No seu exemplo anterior era 2026, vou manter 2026 para consistência.
   const targetYear = 2026;
-  const targetMonth = 5; // Junho é índice 5 (Janeiro é 0)
+  const targetMonth = 6; // Julho é índice 6 (Janeiro é 0)
 
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
-      // --- CONFIGURAÇÃO DE DATAS SOLICITADA ---
-      // 1. Inicia o calendário em Junho
+      // Inicia o calendário em Julho de 2026
       defaultMonth={new Date(targetYear, targetMonth)}
       
-      // 2. Bloqueia todas as datas EXCETO 16 e 25 de Junho
+      // Bloqueia todas as datas EXCETO 28 e 30 de Julho de 2026
       disabled={(date) => {
-        const isJune = date.getMonth() === targetMonth && date.getFullYear() === targetYear;
-        const isDay16 = date.getDate() === 16;
-        const isDay25 = date.getDate() === 25;
+        const isJuly = date.getMonth() === targetMonth && date.getFullYear() === targetYear;
+        const isDay28 = date.getDate() === 28;
+        const isDay30 = date.getDate() === 30;
         
-        // Desabilita se NÃO for (Junho E (dia 16 OU dia 25))
-        return !(isJune && (isDay16 || isDay25));
+        // Desabilita se NÃO for (Julho E (dia 28 OU dia 30))
+        return !(isJuly && (isDay28 || isDay30));
       }}
-      // ---------------------------------------
 
       className={cn(
         'bg-background group/calendar p-3 [--cell-size:--spacing(8)]',
@@ -68,12 +62,17 @@ function Calendar({
         weekday: 'text-purple-400/80 font-normal text-[0.8rem]',
         today: 'bg-purple-50 text-[#5B2C83] font-bold rounded-md',
         selected: 'bg-[#5B2C83] text-white hover:bg-[#2D1057]',
-        disabled: 'text-slate-200 opacity-40 cursor-not-allowed', // Datas bloqueadas ficam bem claras
+        disabled: 'text-slate-200 opacity-40 cursor-not-allowed',
         ...classNames,
       }}
       components={{
         Chevron: ({ className, orientation, ...props }) => {
-          const Icon = orientation === 'left' ? ChevronLeftIcon : orientation === 'right' ? ChevronRightIcon : ChevronDownIcon;
+          const Icon =
+            orientation === 'left'
+              ? ChevronLeftIcon
+              : orientation === 'right'
+              ? ChevronRightIcon
+              : ChevronDownIcon
           return <Icon className={cn('size-4', className)} {...props} />
         },
         DayButton: CalendarDayButton,
@@ -97,9 +96,7 @@ function CalendarDayButton({
       data-selected={modifiers.selected}
       className={cn(
         'flex aspect-square size-auto w-full min-w-(--cell-size) transition-all',
-        // Estilo Roxo AIMA para o dia disponível/selecionado
         'data-[selected=true]:bg-[#5B2C83] data-[selected=true]:text-white rounded-md',
-        // Feedback visual apenas para os dias que NÃO estão desabilitados
         '!disabled:hover:bg-purple-100 !disabled:hover:text-[#5B2C83] !disabled:text-[#2D1057] !disabled:font-bold',
         className,
       )}
