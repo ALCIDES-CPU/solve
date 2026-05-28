@@ -24,24 +24,23 @@ function Calendar({
   const defaultClassNames = getDefaultClassNames()
 
   const targetYear = 2026;
-  const targetMonth = 6; // Julho é índice 6 (Janeiro é 0)
+  const targetMonth = 7; // Agosto é índice 7 (Janeiro é 0)
 
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
-      // Inicia o calendário em Julho de 2026
+      // Inicia o calendário em Agosto de 2026
       defaultMonth={new Date(targetYear, targetMonth)}
-      
-      // Bloqueia todas as datas EXCETO 28 e 30 de Julho de 2026
-      disabled={(date) => {
-        const isJuly = date.getMonth() === targetMonth && date.getFullYear() === targetYear;
-        const isDay28 = date.getDate() === 28;
-        const isDay30 = date.getDate() === 30;
-        
-        // Desabilita se NÃO for (Julho E (dia 28 OU dia 30))
-        return !(isJuly && (isDay28 || isDay30));
-      }}
 
+      // Bloqueia todas as datas EXCETO 4 e 5 de Agosto de 2026
+      disabled={(date) => {
+        const isAugust = date.getMonth() === targetMonth && date.getFullYear() === targetYear;
+        const isDay4 = date.getDate() === 4;
+        const isDay5 = date.getDate() === 5;
+
+        // Desabilita se NÃO for (Agosto E (dia 4 OU dia 5))
+        return !(isAugust && (isDay4 || isDay5));
+      }}
       className={cn(
         'bg-background group/calendar p-3 [--cell-size:--spacing(8)]',
         className,
@@ -76,6 +75,7 @@ function Calendar({
           return <Icon className={cn('size-4', className)} {...props} />
         },
         DayButton: CalendarDayButton,
+        ...components,
       }}
       {...props}
     />
