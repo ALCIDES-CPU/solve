@@ -34,7 +34,7 @@ export default function ConfirmacaoPage() {
                   Agendamento pendente a confirmação de pagamento!
                 </CardTitle>
                 <CardDescription className="text-sm text-slate-500">
-                  O seu agendamento foi processado com sucesso, estamos aguardando a confirmação do seu pagamento através do portal seguro.
+                  O seu agendamento foi processado com sucesso, estamos aguardando a confirmação do seu pagamento.
                 </CardDescription>
               </CardHeader>
 
