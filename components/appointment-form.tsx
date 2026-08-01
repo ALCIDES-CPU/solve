@@ -94,24 +94,60 @@ export function AppointmentForm() {
     setIsSubmitting(true)
 
     try {
-      // Store appointment data in sessionStorage
+      // Payload completo — os ficheiros são substituídos pelos seus metadados
+      // porque objetos File não são serializáveis em JSON.
       const appointmentData = {
-        ...formData,
-        appointmentDate: date?.toISOString(),
+        nomeCompleto: formData.nomeCompleto,
+        dataNascimento: formData.dataNascimento,
+        tipoDocumento: formData.tipoDocumento,
+        numeroDocumento: formData.numeroDocumento,
+        email: formData.email,
+        telefone: formData.telefone,
+        paisNacionalidade: formData.paisNacionalidade,
+        tipoServico: formData.tipoServico,
+        outrosDetalhes: formData.outrosDetalhes,
+        pais: formData.pais,
+        centroAtendimento: formData.centroAtendimento,
+        horaDesejada: formData.horaDesejada,
+        dataPretendida: date ? format(date, "yyyy-MM-dd") : "",
+        appointmentDate: date?.toISOString() ?? "",
+        documentoIdentificacaoNome: formData.documentoIdentificacao?.name ?? "",
+        documentoIdentificacaoTamanho: formData.documentoIdentificacao?.size?.toString() ?? "",
+        vistoAutorizacaoNome: formData.vistoAutorizacao?.name ?? "",
+        vistoAutorizacaoTamanho: formData.vistoAutorizacao?.size?.toString() ?? "",
+        outrosDocumentosNome: formData.outrosDocumentos?.name ?? "",
+        outrosDocumentosTamanho: formData.outrosDocumentos?.size?.toString() ?? "",
         submittedAt: new Date().toISOString(),
       }
 
-      sessionStorage.setItem("appointmentData", JSON.stringify(appointmentData))
+      // Guardar na base de dados Supabase
+      const response = await fetch("/api/agendamentos", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ appointmentData }),
+      })
 
-      // Simulate processing delay
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      const result = await response.json()
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || "Erro ao guardar o agendamento")
+      }
+
+      sessionStorage.setItem(
+        "appointmentData",
+        JSON.stringify({
+          ...appointmentData,
+          agendamentoId: result.agendamentoId,
+          referencia: result.referencia,
+        }),
+      )
 
       // Redirect to payment with service type
       const serviceType = formData.tipoServico || "agendamento-geral"
       router.push(`/pagamento?service=${serviceType}`)
     } catch (error) {
       console.error("Error submitting form:", error)
-      alert("Erro ao submeter o formulário. Por favor, tente novamente.")
+      setErrors({ submit: error instanceof Error ? error.message : "Erro ao submeter o formulário." })
     } finally {
       setIsSubmitting(false)
     }
@@ -756,11 +792,17 @@ export function AppointmentForm() {
               </ul>
             </div>
 
-            <div className="flex justify-between">
-              <Button type="button" variant="outline" onClick={handleBack} className="rounded bg-transparent">
-                Voltar
-              </Button>
-              <Button type="submit" disabled={isSubmitting} className="rounded">
+      {errors.submit && (
+        <p className="text-sm text-destructive text-right" role="alert">
+          {errors.submit}
+        </p>
+      )}
+
+      <div className="flex justify-between">
+        <Button type="button" variant="outline" onClick={handleBack} className="rounded bg-transparent">
+          Voltar
+        </Button>
+        <Button type="submit" disabled={isSubmitting} className="rounded">
                 {isSubmitting ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />A processar...

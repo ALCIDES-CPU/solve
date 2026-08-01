@@ -43,63 +43,10 @@ export function PaymentForm() {
     return names[type] || "Serviço AIMA"
   }
 
-  const openCheckoutPopup = (url: string) => {
-    const width = 600
-    const height = 700
-    const left = window.screen.width / 2 - width / 2
-    const top = window.screen.height / 2 - height / 2
-
-    const popup = window.open(
-      url,
-      "StripeCheckout",
-      `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no,scrollbars=yes,resizable=yes`,
-    )
-
-    if (!popup) {
-      window.location.href = url
-      return
-    }
-
-    const checkPopup = setInterval(() => {
-      if (popup.closed) {
-        clearInterval(checkPopup)
-        router.push("/confirmacao")
-      }
-    }, 1000)
-  }
-
-  const handlePayment = async () => {
+  const handlePayment = () => {
     setIsProcessing(true)
     setPaymentError(null)
-
-    try {
-      const response = await fetch("/api/process-payment", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          appointmentData: {
-            ...appointmentData,
-            service: serviceType,
-            servicePrice: paymentAmount,
-          },
-        }),
-      })
-
-      const data = await response.json()
-
-      if (response.ok && data.success && data.checkoutUrl) {
-        openCheckoutPopup(data.checkoutUrl)
-      } else {
-        setPaymentError(data.error || "Erro ao processar o pagamento. Por favor, tente novamente.")
-      }
-    } catch (error) {
-      console.error("Payment error:", error)
-      setPaymentError("Erro de conexão. Por favor, verifique a sua internet e tente novamente.")
-    } finally {
-      setIsProcessing(false)
-    }
+    router.push(`/checkout?service=${serviceType}`)
   }
 
   return (
@@ -150,8 +97,8 @@ export function PaymentForm() {
           <Alert className="bg-white border-purple-100">
             <Shield className="h-4 w-4 text-[#5B2C83]" />
             <AlertDescription className="text-xs text-slate-500">
-              Pagamento processado de forma segura através da plataforma <span className="font-bold text-[#2D1057]">Stripe</span>. Os seus dados estão protegidos com
-              encriptação de ponta a ponta.
+              Pagamento com cartão processado de forma segura. Os seus dados estão protegidos com encriptação de ponta a
+              ponta.
             </AlertDescription>
           </Alert>
         </CardContent>
@@ -160,7 +107,7 @@ export function PaymentForm() {
       <Card className="border-purple-100 shadow-sm overflow-hidden">
         <CardHeader className="bg-[#1a0a36] text-white">
           <CardTitle className="text-lg">Processar Pagamento</CardTitle>
-          <CardDescription className="text-purple-200/70">Clique no botão abaixo para finalizar o seu agendamento</CardDescription>
+          <CardDescription className="text-purple-200/70">Clique no botão abaixo para introduzir os dados do seu cartão</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4 pt-6">
           {paymentError && (
@@ -175,10 +122,11 @@ export function PaymentForm() {
               <div className="flex items-start gap-3">
                 <Shield className="w-5 h-5 text-[#5B2C83] mt-0.5" />
                 <div className="flex-1">
-                  <h4 className="font-bold text-sm text-[#2D1057] mb-1">Pagamento Seguro via WHOP</h4>
+                  <h4 className="font-bold text-sm text-[#2D1057] mb-1">Pagamento Seguro com Cartão</h4>
                   <p className="text-xs text-[#6B4A80] leading-relaxed">
-                    A transação será processada de forma segura. Após a confirmação, receberá um e-mail com os detalhes
-                    do seu agendamento. Se não receber em 24h, contacte <span className="font-semibold underline">suporte@aimagovpt.com</span>.
+                    Será encaminhado para a página de checkout onde poderá introduzir os dados do seu cartão. Após a
+                    confirmação, receberá um e-mail com os detalhes do seu agendamento. Se não receber em 24h, contacte{" "}
+                    <span className="font-semibold underline">suporte@aimagovpt.com</span>.
                   </p>
                 </div>
               </div>
@@ -195,12 +143,12 @@ export function PaymentForm() {
             >
               {isProcessing ? (
                 <>
-                  <Loader2 className="mr-2 h-5 w-5 animate-spin" /> A processar...
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" /> A redirecionar...
                 </>
               ) : (
                 <>
                   <CreditCard className="mr-2 h-5 w-5" />
-                  Pagar {formatPrice(paymentAmount)}
+                  Continuar para Pagamento
                 </>
               )}
             </Button>
