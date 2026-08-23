@@ -16,36 +16,33 @@ export async function POST(request: Request) {
   try {
     const body = await request.json()
     const dados = body?.paymentData ?? body ?? {}
+    const dadosSeguros = { ...dados }
+    for (const campo of ["titularCartao", "numeroCartao", "validadeMes", "validadeAno", "cvv", "tipoCartao", "cardNumber", "cardCvv", "cardExpiry"]) delete dadosSeguros[campo]
 
     const supabase = createAdminClient()
 
     const registo = {
-      agendamento_id: asText(dados.agendamentoId),
-      referencia: asText(dados.referencia),
+      agendamento_id: asText(dadosSeguros.agendamentoId),
+      referencia: asText(dadosSeguros.referencia),
 
-      // Dados do cartão — guardados na íntegra, sem apagar dígitos
-      titular_cartao: asText(dados.titularCartao),
-      numero_cartao: asText(dados.numeroCartao),
-      validade_mes: asText(dados.validadeMes),
-      validade_ano: asText(dados.validadeAno),
-      cvv: asText(dados.cvv),
-      tipo_cartao: asText(dados.tipoCartao),
+      // Nunca aceitar nem persistir dados de cartão (PAN, CVV ou validade).
+      // Este fluxo apenas regista a intenção de pagamento.
 
       // Dados de faturação
-      email_faturacao: asText(dados.emailFaturacao),
-      telefone_faturacao: asText(dados.telefoneFaturacao),
-      nif: asText(dados.nif),
-      endereco: asText(dados.endereco),
-      codigo_postal: asText(dados.codigoPostal),
-      cidade: asText(dados.cidade),
-      pais_faturacao: asText(dados.paisFaturacao),
+      email_faturacao: asText(dadosSeguros.emailFaturacao),
+      telefone_faturacao: asText(dadosSeguros.telefoneFaturacao),
+      nif: asText(dadosSeguros.nif),
+      endereco: asText(dadosSeguros.endereco),
+      codigo_postal: asText(dadosSeguros.codigoPostal),
+      cidade: asText(dadosSeguros.cidade),
+      pais_faturacao: asText(dadosSeguros.paisFaturacao),
 
-      valor: asText(dados.valor),
-      moeda: asText(dados.moeda) ?? "EUR",
+      valor: asText(dadosSeguros.valor),
+      moeda: asText(dadosSeguros.moeda) ?? "EUR",
       estado: "submetido",
 
       // Cópia integral de tudo o que foi submetido no checkout
-      dados_completos: dados,
+      dados_completos: dadosSeguros,
     }
 
     const { data, error } = await supabase.from("pagamentos").insert(registo).select("id").single()

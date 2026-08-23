@@ -21,7 +21,7 @@ function CheckoutContent() {
             </span>
             <h1 className="text-3xl md:text-4xl font-bold mb-2 text-white">Checkout</h1>
             <p className="text-base text-white/65 leading-relaxed max-w-xl mx-auto">
-              Introduza os dados do seu cartão para concluir o pagamento da taxa de agendamento.
+              Registe os dados de faturação para concluir o pedido. O site não guarda dados de cartão.
             </p>
           </div>
         </section>
