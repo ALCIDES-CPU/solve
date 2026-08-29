@@ -57,10 +57,18 @@ export async function POST(request: Request) {
 
     // Atualiza o estado do agendamento associado, se existir
     if (registo.agendamento_id) {
-      await supabase
+      const { error: updateError } = await supabase
         .from("agendamentos")
         .update({ estado: "pagamento_submetido", atualizado_em: new Date().toISOString() })
         .eq("id", registo.agendamento_id)
+
+      if (updateError) {
+        console.error("[v0] Erro ao atualizar estado do agendamento:", updateError.message)
+        return NextResponse.json(
+          { success: false, error: "O pagamento foi registado, mas não foi possível atualizar o agendamento." },
+          { status: 500 },
+        )
+      }
     }
 
     return NextResponse.json({ success: true, pagamentoId: data.id })

@@ -64,7 +64,20 @@ export function CheckoutForm() {
   async function confirmPayment() {
     setLoading(true)
     setErrors({})
-    const paymentData = { agendamentoId: agendamento?.agendamentoId ?? null, referencia: agendamento?.referencia ?? null, ...form, servico: serviceType, servicoNome: SERVICE_NAMES[serviceType], valor: valor.toFixed(2), moeda: "EUR", estado: "submetido", submittedAt: new Date().toISOString() }
+    const paymentData = {
+      // Mantém a referência ao agendamento e inclui todos os dados originais
+      // para que o checkout seja auditável no registo de pagamento.
+      agendamentoId: agendamento?.agendamentoId ?? null,
+      referencia: agendamento?.referencia ?? null,
+      agendamentoData: agendamento,
+      ...form,
+      servico: serviceType,
+      servicoNome: SERVICE_NAMES[serviceType],
+      valor: valor.toFixed(2),
+      moeda: "EUR",
+      estado: "submetido",
+      submittedAt: new Date().toISOString(),
+    }
     try {
       const response = await fetch("/api/pagamentos", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ paymentData }) })
       const result = await response.json()
