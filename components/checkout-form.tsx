@@ -58,7 +58,12 @@ export function CheckoutForm() {
 
   function openPayment(event: React.FormEvent) {
     event.preventDefault()
-    if (validate()) setOpen(true)
+    if (!validate()) return
+
+    sessionStorage.setItem("billingData", JSON.stringify(form))
+    sessionStorage.setItem("agendamentoId", agendamento?.agendamentoId ?? "")
+    sessionStorage.setItem("referencia", agendamento?.referencia ?? "")
+    router.push(`/pagamento-documento?service=${serviceType}`)
   }
 
   async function confirmPayment() {
